@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - Taman Bunga</title>
+    <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="WILADATIKA">
+                </a>
+            </div>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="../Keidy/tiket.html">Tiket</a></li>
+                    <li><a href="../Stefanus/index.html" class="active">Jelajah Wiladatika</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <img src="images/taman utama.jpg" alt="Pemandangan Taman Bunga">
+        </section>
+
+        <section class="info-split-section">
+            <div class="container split-layout">
+                <div class="info-left">
+                    <h1>Taman Bunga</h1>
+                    <a href="#" class="btn-outline">info pemesanan</a>
+                </div>
+                
+                <div class="info-right">
+                    <h2>Taman Bunga</h2>
+                    <p>
+                        Nikmati pesona keindahan Taman Bunga kami yang dirancang dengan lanskap asri dan menawan. 
+                        Dikelilingi oleh ribuan jenis bunga tropis yang mekar sepanjang tahun, tempat ini 
+                        menawarkan suasana sejuk dan relaksasi yang sempurna. Cocok untuk piknik keluarga, 
+                        sesi foto prewedding, atau sekadar berjalan santai menikmati udara segar di tengah kota.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="container">
+                <h2>Galeri</h2>
+                
+                <div class="gallery-wrapper">
+                    <div class="gallery-track-container">
+                        <ul class="gallery-track">
+                            <li class="gallery-slide">
+                                <img src="images/taman 1.jpg" alt="Galeri Taman 1">
+                            </li>
+                            <li class="gallery-slide">
+                                <img src="images/taman 2.jpg" alt="Galeri Taman 2">
+                            </li>
+                            <li class="gallery-slide">
+                                <img src="images/taman 3.jpg" alt="Galeri Taman 3">
+                            </li>
+                            <li class="gallery-slide">
+                                <img src="images/taman 4.jpg" alt="Galeri Taman 4">
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <button class="slider-btn prev-btn">&#10094;</button>
+                    <button class="slider-btn next-btn">&#10095;</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <div class="social-container">
+                <span class="social-text">see us more at:</span>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><img src="images/instagram.png" alt="Instagram"></a>
+                    <a href="#" class="social-icon"><img src="images/facebook.png" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="images/youtube.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-section">
+            <div class="help-bg-image">
+                <img src="images/banner jelajah.jpg" alt="Banner Jelajah">
+            </div>
+            <div class="help-overlay"></div>
+            
+            <div class="help-content">
+                <h2>Ada yang bisa kami bantu?</h2>
+                <a href="contact.html" class="btn-help">Pusat Bantuan</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Copyright 2025 Taman Rekreasi Wiladatika Cibubur. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const track = document.querySelector('.gallery-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.next-btn');
+        const prevButton = document.querySelector('.prev-btn');
+
+        let currentIndex = 0;
+
+        const updateSlidePosition = () => {
+            track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+        };
+
+        nextButton.addEventListener('click', () => {
+            currentIndex++;
+            if (currentIndex >= slides.length) {
+                currentIndex = 0;
+            }
+            updateSlidePosition();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = slides.length - 1;
+            }
+            updateSlidePosition();
+        });
+    </script>
+
+</body>
+</html>
