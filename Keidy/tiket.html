@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiket Taman Rekreasi Wiladatika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Logo TRW" class="logo-img">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../Keidy/tiket.html">Tiket</a></li>
+                <li><a href="../Stefanus/index.html">Jelajah Wiladatika</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Tiket</h1>
+        <h2>Beli tiket disini</h2>
+
+        <div class="filters-container">
+            <div class="filter-box">
+                <input type="date" class="filter-input" placeholder="Pilih tanggal kedatangan" required>
+            </div>
+
+            <div class="filter-box">
+                <select class="filter-select" id="unitSelect" onchange="filterTickets()">
+                    <option value="all">Semua unit</option>
+                    <option value="pool">Kolam Renang</option>
+                    <option value="tennis">Lapangan Tenis</option>
+                </select>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="ticket-list">
+                <span class="section-label">Tiket yang tersedia:</span>
+
+                <div class="ticket-card" id="ticket-1" data-category="pool">
+                    <img src="images/kolam renang.png" alt="Kolam Renang" class="ticket-img">
+                    <div class="ticket-details">
+                        <div>
+                            <div class="ticket-name">Kolam Renang - Tirta Teja 1</div>
+                            <a href="#" class="ticket-terms">Lihat syarat & ketentuan tiket ></a>
+                        </div>
+                        <div class="ticket-price">Rp20.000/pax</div>
+                    </div>
+                    
+                    <div class="action-wrapper">
+                        <button class="btn-add" onclick="addToCart(1, 'Kolam Renang - Tirta Teja 1', 20000)">Tambah</button>
+                        <div class="counter-control" id="counter-1">
+                            <button class="counter-btn" onclick="updateQty(1, -1)">-</button>
+                            <span class="count-val" id="count-val-1">1</span>
+                            <button class="counter-btn" onclick="updateQty(1, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-card" id="ticket-2" data-category="tennis">
+                    <img src="images/lapangan tennis.jpg" alt="Lapangan Tennis" class="ticket-img">
+                    <div class="ticket-details">
+                        <div>
+                            <div class="ticket-name">Lapangan Tennis - Outdoor</div>
+                            <a href="#" class="ticket-terms">Lihat syarat & ketentuan tiket ></a>
+                        </div>
+                        <div class="ticket-price">Rp100.000/pax</div>
+                    </div>
+                    
+                    <div class="action-wrapper">
+                        <button class="btn-add" onclick="addToCart(2, 'Lapangan Tennis - Outdoor', 100000)">Tambah</button>
+                        <div class="counter-control" id="counter-2">
+                            <button class="counter-btn" onclick="updateQty(2, -1)">-</button>
+                            <span class="count-val" id="count-val-2">1</span>
+                            <button class="counter-btn" onclick="updateQty(2, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="cart-sidebar">
+                <div class="cart-card">
+                    <div class="cart-header">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Shopping Cart</span>
+                    </div>
+
+                    <div id="cart-items" class="cart-items-container">
+                        <div class="empty-msg">Keranjang kosong</div>
+                    </div>
+
+                    <div class="cart-divider"></div>
+
+                    <div class="subtotal-row">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal">Rp0</span>
+                    </div>
+
+                    <a href="pembayaran.html" class="btn-checkout">Beli Tiket</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <div class="help-banner">
+        <img src="images/Background.png" alt="Park Background" class="help-banner-bg">
+        <div class="banner-content">
+            <h2>Ada yang bisa kami bantu?</h2>
+            <button class="btn-help">Pusat Bantuan</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-address">
+            Jl. Jambore No.1, Harjamukti, Kec. Cimanggis,<br>
+            Kota Depok, Jawa Barat 13720<br>
+            <span style="text-decoration: underline; font-weight: 700;">0811-8432-024</span>
+        </div>
+        <div class="social-icons">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook-square"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </footer>
+
+    <script>
+        function filterTickets() {
+            const selectedUnit = document.getElementById('unitSelect').value;
+            const ticketPool = document.getElementById('ticket-1');
+            const ticketTennis = document.getElementById('ticket-2');
+
+            ticketPool.style.display = 'flex';
+            ticketTennis.style.display = 'flex';
+
+            if (selectedUnit === 'pool') {
+                ticketTennis.style.display = 'none';
+            } else if (selectedUnit === 'tennis') {
+                ticketPool.style.display = 'none';
+            }
+        }
+
+        let cart = {};
+
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+        }
+
+        function addToCart(id, name, price) {
+            if (!cart[id]) {
+                cart[id] = { name, price, qty: 1 };
+                const card = document.getElementById(`ticket-${id}`);
+                card.querySelector('.btn-add').style.display = 'none';
+                card.querySelector('.counter-control').style.display = 'flex';
+                document.getElementById(`count-val-${id}`).innerText = 1;
+            }
+            renderCart();
+        }
+
+        function updateQty(id, change) {
+            if (cart[id]) {
+                cart[id].qty += change;
+                if (cart[id].qty <= 0) {
+                    delete cart[id];
+                    const card = document.getElementById(`ticket-${id}`);
+                    card.querySelector('.btn-add').style.display = 'block';
+                    card.querySelector('.counter-control').style.display = 'none';
+                } else {
+                    document.getElementById(`count-val-${id}`).innerText = cart[id].qty;
+                }
+                renderCart();
+            }
+        }
+
+        function removeItem(id) {
+            cart[id].qty = 0;
+            updateQty(id, 0); 
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            
+            container.innerHTML = '';
+            let total = 0;
+            let hasItems = false;
+
+            for (const [id, item] of Object.entries(cart)) {
+                hasItems = true;
+                total += item.price * item.qty;
+
+                const itemHTML = `
+                    <div class="cart-item">
+                        <div class="cart-item-details" style="flex:1;">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-qty">${item.qty}x</div>
+                        </div>
+                        <button class="btn-remove" onclick="removeItem(${id})">x</button>
+                    </div>
+                `;
+                container.innerHTML += itemHTML;
+            }
+
+            if (!hasItems) {
+                container.innerHTML = '<div class="empty-msg">Keranjang kosong</div>';
+            }
+
+            subtotalEl.innerText = formatRupiah(total);
+        }
+    </script>
+</body>
+</html>

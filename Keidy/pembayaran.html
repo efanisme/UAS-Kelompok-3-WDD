@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - Taman Rekreasi Wiladatika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Logo TRW" class="logo-img">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../Keidy/tiket.html">Tiket</a></li>
+                <li><a href="../Stefanus/index.html">Jelajah Wiladatika</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Pembayaran</h1>
+        <h2>Selesaikan pembayaran Anda</h2>
+
+        <div class="content-grid">
+            <div class="left-column">
+                <h3 class="payment-section-title">Detail Pesanan</h3>
+                <div class="order-detail-card">
+                    <div class="order-item-row">
+                        <div class="order-item-name">
+                            Kolam Renang - Tirta Teja 1
+                            <span>Senin, 24 Mei 2024</span>
+                        </div>
+                        <div class="order-item-qty">2x</div>
+                        <div class="order-item-price">Rp40.000</div>
+                    </div>
+                    <div style="border-bottom: 1px solid #eee; margin: 15px 0;"></div>
+                </div>
+
+                <h3 class="payment-section-title">Metode Pembayaran</h3>
+                <div class="payment-accordion">
+                    <div class="payment-header active" onclick="togglePaymentPanel(this)">
+                        <span>Virtual Account</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    
+                    <div class="payment-content open" id="paymentPanel">
+                        <div class="bank-option-container">
+                            <input type="radio" id="bca" name="payment_method" value="4000" onchange="calculateTotal()" checked>
+                            <label for="bca" class="bank-label">
+                                <img src="images/logo-bca.png" alt="BCA" class="bank-logo">
+                                <div class="bank-details">
+                                    BCA Virtual Account
+                                    <span>Biaya layanan Rp4.000</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="bank-option-container">
+                            <input type="radio" id="mandiri" name="payment_method" value="3500" onchange="calculateTotal()">
+                            <label for="mandiri" class="bank-label">
+                                <img src="images/logo-mandiri.png" alt="Mandiri" class="bank-logo">
+                                <div class="bank-details">
+                                    Mandiri Virtual Account
+                                    <span>Biaya layanan Rp3.500</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="cart-sidebar">
+                <div class="cart-card">
+                   <h3 style="margin-bottom: 25px; font-size: 18px;">Rincian Harga</h3>
+
+                   <div class="summary-row">
+                       <span>Total Harga Tiket (2 item)</span>
+                       <span>Rp40.000</span>
+                   </div>
+                   
+                   <div class="summary-row">
+                       <span>Biaya layanan</span>
+                       <span id="service-fee" style="color: var(--text-dark);">Rp0</span>
+                   </div>
+
+                   <div class="cart-divider"></div>
+
+                   <div class="summary-total">
+                       <span>Total Bayar</span>
+                       <span id="final-total" style="color: var(--green); font-size: 20px;">Rp40.000</span>
+                   </div>
+
+                   <button class="btn-pay-now">Bayar Sekarang</button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <div class="help-banner">
+        <img src="images/Background.png" alt="Park Background" class="help-banner-bg">
+        <div class="banner-content">
+            <h2>Ada yang bisa kami bantu?</h2>
+            <button class="btn-help">Pusat Bantuan</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-address">
+            Jl. Jambore No.1, Harjamukti, Kec. Cimanggis,<br>
+            Kota Depok, Jawa Barat 13720<br>
+            <span style="text-decoration: underline; font-weight: 700;">0811-8432-024</span>
+        </div>
+        <div class="social-icons">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook-square"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </footer>
+
+    <script>
+        const baseTicketPrice = 40000;
+
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+        }
+
+        function togglePaymentPanel(headerElement) {
+            headerElement.classList.toggle('active');
+            const panel = headerElement.nextElementSibling;
+            panel.classList.toggle('open');
+        }
+
+        function calculateTotal() {
+            const selectedMethod = document.querySelector('input[name="payment_method"]:checked');
+            
+            let adminFee = 0;
+            if (selectedMethod) {
+                adminFee = parseInt(selectedMethod.value);
+            }
+
+            const finalTotal = baseTicketPrice + adminFee;
+
+            document.getElementById('service-fee').innerText = formatRupiah(adminFee);
+            document.getElementById('final-total').innerText = formatRupiah(finalTotal);
+        }
+
+        window.onload = calculateTotal;
+    </script>
+</body>
+</html>
